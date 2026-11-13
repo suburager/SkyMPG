@@ -41,6 +41,7 @@
 Собирается и подписывается автором. Только эти сборки я могу гарантировать.
 
 - **GitHub Releases:** [последний релиз](https://github.com/suburager/skympg/releases/latest), файл `SkyMPG-1.0-RELEASE.apk`
+- **4PDA:** (https://4pda.to/forum/index.php?showtopic=1129537)
 
 Проверьте файл по SHA-256, который указан в описании релиза:
 
