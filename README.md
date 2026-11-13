@@ -4,10 +4,6 @@
 
 A lightweight Telegram client for old Android devices, from Android 1.5 up. Instead of implementing the Telegram protocol on the phone, SkyMPG talks to an [MPGram](https://github.com/shinovon/mpgram-web) server over plain HTTP and a JSON API. That keeps it small and fast on old hardware.
 
-<p align="center">
-  <img src="screenshots/screenshot.png" alt="SkyMPG on an old Android phone" width="320">
-</p>
-
 ## Screenshots
 
 <p align="center">
