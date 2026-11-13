@@ -40,12 +40,12 @@ A lightweight Telegram client for old Android devices, from Android 1.5 up. Inst
 
 Built and signed by the author. These are the only builds I vouch for.
 
-- **GitHub Releases:** [latest release](https://github.com/suburager/skympg/releases/latest), file `skympg.apk`
+- **GitHub Releases:** [latest release](https://github.com/suburager/skympg/releases/latest), file `SkyMPG-1.0-RELEASE.apk`
 
 Verify the file against the SHA-256 checksum published in the release notes:
 
 ```
-sha256sum skympg.apk
+sha256sum SkyMPG-1.0-RELEASE.apk
 ```
 
 ### Mirrors
@@ -54,9 +54,9 @@ These sites host copies of SkyMPG for convenience. I do not control them and can
 
 | Source | Link |
 |---|---|
-| [Mirror name] | [Mirror link] |
+| [...] | [...] |
 
-If a mirror serves a file whose checksum does not match the primary release, do not install it and please open an issue.
+If a mirror site contains a file with a checksum that does not match the one for the official release, do not install it under any circumstances. It could contain absolutely anything.
 
 ## Build
 
