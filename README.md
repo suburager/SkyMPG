@@ -41,6 +41,7 @@ A lightweight Telegram client for old Android devices, from Android 1.5 up. Inst
 Built and signed by the author. These are the only builds I vouch for.
 
 - **GitHub Releases:** [latest release](https://github.com/suburager/skympg/releases/latest), file `SkyMPG-1.0-RELEASE.apk`
+- - **4PDA:** (https://4pda.to/forum/index.php?showtopic=1129537)
 
 Verify the file against the SHA-256 checksum published in the release notes:
 
