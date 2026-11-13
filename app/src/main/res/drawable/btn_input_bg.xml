@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Фон кнопок строки ввода: точно по размеру кнопки, без прозрачных полей системного фона -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true">
+        <shape android:shape="rectangle">
+            <solid android:color="#FFA9D4F2" />
+            <stroke android:width="1dip" android:color="#FF33B5E5" />
+            <corners android:radius="4dip" />
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#FFE6E6E6" />
+            <stroke android:width="1dip" android:color="#FF9E9E9E" />
+            <corners android:radius="4dip" />
+        </shape>
+    </item>
+</selector>

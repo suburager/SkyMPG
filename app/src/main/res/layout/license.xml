@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/header" />
+
+    <TextView
+        android:id="@+id/textInfo"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:padding="12dip"
+        android:text="@string/main_loading"
+        android:textColor="#FFAAAAAA"
+        android:textSize="14sp" />
+
+    <!-- Лицензия строится из абзацев: список рисует только видимые строки -->
+    <ListView
+        android:id="@+id/listLicense"
+        android:layout_width="fill_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:cacheColorHint="#FF0E1522"
+        android:divider="@null"
+        android:fadingEdge="none"
+        android:visibility="gone" />
+</LinearLayout>

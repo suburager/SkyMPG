@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SkyMPG</string>
+
+    <string name="label_instance">Instance</string>
+    <string name="hint_instance">http://host/path/</string>
+    <string name="label_instance_password">Instance password (if required)</string>
+    <string name="label_phone">Phone number</string>
+    <string name="hint_phone">+1234567890</string>
+    <string name="btn_login_phone">Log in with phone number</string>
+    <string name="btn_login_qr">Log in with QR code</string>
+
+    <string name="label_code">Enter the code from Telegram</string>
+    <string name="label_password">Cloud password (two-step verification)</string>
+    <string name="menu">Menu</string>
+    <string name="btn_ok">Continue</string>
+    <string name="btn_resend">Resend code</string>
+    <string name="btn_code_to_qr"><u>Code not arriving?</u></string>
+    <string name="btn_cancel">Cancel</string>
+    <string name="qr_hint">Open Telegram on a modern device: Settings &gt; Devices &gt; Link Desktop Device, and scan this code.</string>
+
+    <string name="warning_new_accounts">Do not use accounts created less than 6 months ago!</string>
+
+    <string name="wait">Please wait…</string>
+    <string name="code_resent">Code resent</string>
+    <string name="err_network">Network error</string>
+    <string name="err_unknown">Unknown error</string>
+    <string name="err_no_instance">Enter the instance address</string>
+    <string name="err_no_phone">Enter your phone number</string>
+    <string name="err_bad_image">Failed to decode the image</string>
+    <string name="err_code_invalid">Wrong code. A new code was sent, enter it.</string>
+    <string name="err_code_expired">The code has expired. A new code was sent, enter it.</string>
+    <string name="err_auth_restart">Authorization was interrupted, start over.</string>
+    <string name="err_phone_invalid">Invalid phone number.</string>
+    <string name="err_no_password">A cloud password is enabled on this account but not set. Cannot log in.</string>
+    <string name="err_need_signup">This number is not registered in Telegram.</string>
+    <string name="err_server">Server-side error</string>
+    <string name="err_unknown_res">Unexpected server response</string>
+    <string name="err_ipw_required">The instance requires a password.</string>
+    <string name="err_ipw_wrong">Wrong instance password.</string>
+    <string name="err_api_disabled">API is disabled on this instance.</string>
+    <string name="err_login_disabled">Login through the API is disabled on this instance.</string>
+    <string name="err_version">The instance does not support this API version.</string>
+
+    <string name="main_loading">Loading…</string>
+    <string name="btn_logout">Log out</string>
+
+    <string name="label_language">Language</string>
+    <string name="lang_auto">Auto (system)</string>
+    <string name="settings">Settings</string>
+
+    <string name="about">About</string>
+    <string name="about_title">About</string>
+    <string name="about_version">Version %1$s</string>
+    <string name="about_description">SkyMPG is a lightweight Telegram client for legacy Android devices (Android 1.5 and newer). Instead of implementing the Telegram protocol on the device, it talks to an MPGram server instance over a simple HTTP and JSON API, which keeps it small and fast on old hardware.</string>
+    <string name="about_credits_title">Credits</string>
+    <string name="about_credits_mpgram">MPGram Web by shinovon: the server and HTTP API this app talks to.</string>
+    <string name="about_credits_madeline">MadelineProto by Daniil Gentili: the Telegram MTProto library MPGram servers are built on.</string>
+    <string name="about_app_license">SkyMPG itself is free software.</string>
+    <string name="about_made_by">Made by suburager with ♥️ to retro Android devices</string>
+    <string name="about_license">License</string>
+    <string name="btn_close">Close</string>
+    <string name="about_disclaimer">This is an unofficial client and is not affiliated with Telegram.</string>
+    <string name="welcome_tagline">A lightweight Telegram client for legacy Android devices</string>
+    <string name="btn_start">Start</string>
+    <string name="instance_custom">Custom instance</string>
+    <string name="ping_offline">no response</string>
+    <string name="ping_ms">ms</string>
+    <string name="ping_recheck"><u>Check again</u></string>
+    <string name="login_title">Log in</string>
+    <string name="captcha_title">Captcha</string>
+    <string name="hint_captcha">Enter the captcha text...</string>
+
+    <string name="refresh">Refresh</string>
+    <string name="chats_empty">No chats</string>
+    <string name="chat_deleted">Deleted account</string>
+    <string name="preview_you">You:</string>
+    <string name="preview_photo">Photo</string>
+    <string name="preview_voice">Voice message</string>
+    <string name="preview_audio">Audio</string>
+    <string name="preview_file">File</string>
+    <string name="preview_link">Link</string>
+    <string name="preview_location">Location</string>
+    <string name="preview_poll">Poll</string>
+    <string name="preview_service">Service message</string>
+    <string name="preview_media">Media</string>
+
+    <string name="chat_empty">No messages</string>
+    <string name="pinned_title">Pinned message</string>
+    <string name="pinned_close">Hide</string>
+    <string name="date_today">Today</string>
+    <string name="date_yesterday">Yesterday</string>
+    <string name="fwd_from">Forwarded from %1$s</string>
+    <string name="fwd_unknown">unknown</string>
+    <string name="svc_joined">%1$s joined</string>
+    <string name="svc_left">%1$s left</string>
+    <string name="svc_renamed">Chat renamed: %1$s</string>
+    <string name="svc_pinned">Message pinned</string>
+    <string name="unit_kb">KB</string>
+    <string name="unit_mb">MB</string>
+    <string name="err_load_older">Could not load older messages</string>
+    <string name="err_load_newer">Could not load newer messages</string>
+
+    <string name="hint_message">Message</string>
+    <string name="btn_send">Send</string>
+    <string name="sending">sending…</string>
+    <string name="err_send_failed">Message not sent</string>
+
+    <string name="folder_all">All</string>
+    <string name="folder_archive">Archive</string>
+    <string name="folder_n">Folder %1$s</string>
+
+    <string name="btn_download">Download</string>
+    <string name="dl_title">Download file?</string>
+    <string name="dl_progress">Downloading…</string>
+    <string name="dl_done">Saved: %1$s</string>
+    <string name="dl_failed">Download failed</string>
+    <string name="dl_no_storage">No writable storage</string>
+    <string name="viewer_loading">Loading…</string>
+    <string name="viewer_error">Could not load the image</string>
+    <string name="btn_scroll_down">Go to the latest message</string>
+
+    <string name="label_pin">PIN code</string>
+    <string name="pin_state_on">Enabled: the PIN is asked when the app is opened</string>
+    <string name="pin_state_off">Disabled</string>
+    <string name="btn_pin_set">Set PIN</string>
+    <string name="btn_pin_disable">Disable PIN</string>
+    <string name="pin_title">PIN code</string>
+    <string name="pin_enter">Enter your PIN</string>
+    <string name="pin_new">Enter a new PIN (4–8 digits)</string>
+    <string name="pin_repeat">Repeat the PIN</string>
+    <string name="pin_confirm_off">Enter your PIN to disable it</string>
+    <string name="pin_wrong">Wrong PIN</string>
+    <string name="pin_mismatch">The PINs do not match, try again</string>
+    <string name="pin_short">The PIN must be 4–8 digits</string>
+    <string name="pin_set_done">PIN set</string>
+    <string name="pin_off_done">PIN disabled</string>
+    <string name="pin_blocked">Too many attempts. Wait %1$d s</string>
+
+    <string name="attach_title">Attach</string>
+    <string name="attach_gallery">Gallery</string>
+    <string name="attach_files">Files</string>
+    <string name="attach_photos">Photos</string>
+    <string name="attach_videos">Videos</string>
+    <string name="attach_no_app">No app found to pick a file</string>
+    <string name="uploading">Sending file…</string>
+    <string name="files_title">Files</string>
+    <string name="files_empty">The folder is empty</string>
+    <string name="files_unreadable">Cannot open this folder</string>
+
+    <string name="upload_progress">%1$d of %2$d: %3$s</string>
+    <string name="attach_limit">No more than %1$d attachments</string>
+    <string name="attach_remove">Remove</string>
+
+    <string name="unit_per_sec">/s</string>
+
+    <string name="link_open_title">Open link?</string>
+    <string name="btn_open">Open</string>
+    <string name="link_blocked">This kind of link is not opened</string>
+    <string name="link_no_app">No app found to open the link</string>
+
+    <string name="upload_done">Files sent: %1$d</string>
+    <string name="warn_title">Warning</string>
+    <string name="warn_android5">This client is designed to work exclusively on Android 1.5–4.4.\n\nThe developer takes no responsibility for bugs, errors or crashes if it is run on Android 5.0 or newer. If you continue, you do so at your own risk.</string>
+    <string name="warn_continue">I understand, continue</string>
+    <string name="warn_exit">Exit</string>
+
+    <string name="emoji_title">Emoji</string>
+    <string name="emoji_delete">Delete</string>
+
+    <string name="btn_download_all">Download all</string>
+    <string name="dl_all_done">Saved files: %1$d (%2$s)</string>
+
+    <string name="chat_info">Chat info</string>
+    <string name="members_one">member</string>
+    <string name="members_few">members</string>
+    <string name="members_many">members</string>
+    <string name="subscribers_one">subscriber</string>
+    <string name="subscribers_few">subscribers</string>
+    <string name="subscribers_many">subscribers</string>
+    <string name="label_username">Username</string>
+    <string name="label_id">ID</string>
+    <string name="copied">Copied</string>
+
+    <string name="btn_write">Write a message</string>
+    <string name="btn_background">Background</string>
+    <string name="dl_notif_done">Downloaded · tap to open</string>
+    <string name="typing_self">typing…</string>
+    <string name="typing_other">%1$s is typing…</string>
+    <string name="voice_self">recording a voice message…</string>
+    <string name="voice_other">%1$s is recording a voice message…</string>
+    <string name="file_self">sending a file…</string>
+    <string name="file_other">%1$s is sending a file…</string>
+    <string name="msg_delete">Delete</string>
+    <string name="msg_copy">Copy</string>
+    <string name="msg_pin">Pin</string>
+    <string name="msg_delete_confirm">Delete this message?</string>
+    <string name="msg_copied">Copied</string>
+    <string name="msg_nothing_to_copy">Nothing to copy</string>
+    <string name="msg_pinned_ok">Pinned</string>
+    <string name="msg_reply">Reply</string>
+    <string name="msg_edit">Edit</string>
+    <string name="msg_actions">Actions...</string>
+    <string name="msg_editing">Editing</string>
+    <string name="err_edit_failed">Could not edit message</string>
+    <string name="reply_cancel">Cancel reply</string>
+</resources>

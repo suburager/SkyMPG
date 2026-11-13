@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#FF000000"
+    android:orientation="vertical">
+
+    <include layout="@layout/header" />
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1">
+
+        <org.mpgram.droid.ZoomImageView
+            android:id="@+id/zoomImage"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" />
+
+        <TextView
+            android:id="@+id/textStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="#FFCCCCCC"
+            android:textSize="14sp" />
+    </FrameLayout>
+
+    <!-- Слева кнопки масштаба, справа маленькая квадратная кнопка скачивания -->
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="6dip">
+
+        <Button
+            android:id="@+id/btnZoomOut"
+            android:layout_width="48dip"
+            android:layout_height="48dip"
+            android:padding="0dip"
+            android:text="−"
+            android:textSize="22sp" />
+
+        <Button
+            android:id="@+id/btnZoomIn"
+            android:layout_width="48dip"
+            android:layout_height="48dip"
+            android:layout_marginLeft="6dip"
+            android:padding="0dip"
+            android:text="+"
+            android:textSize="22sp" />
+
+        <View
+            android:layout_width="0dip"
+            android:layout_height="1dip"
+            android:layout_weight="1" />
+
+        <ImageButton
+            android:id="@+id/btnDownload"
+            android:layout_width="48dip"
+            android:layout_height="48dip"
+            android:contentDescription="@string/btn_download"
+            android:scaleType="center"
+            android:src="@drawable/ic_download" />
+    </LinearLayout>
+</LinearLayout>

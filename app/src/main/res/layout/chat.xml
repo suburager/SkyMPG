@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/header" />
+
+    <!-- Плашка закреплённого сообщения: под шапкой; касание прыгает к нему, крестик прячет -->
+    <LinearLayout
+        android:id="@+id/pinnedBar"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="46dip"
+            android:background="@drawable/pinned_bar_bg"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <View
+                android:layout_width="4dip"
+                android:layout_height="fill_parent"
+                android:background="#FF33B5E5" />
+
+            <LinearLayout
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dip"
+                android:layout_marginRight="2dip"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/pinnedCaption"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:textColor="#FF3A6EA5"
+                    android:textSize="11sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/pinnedText"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:textColor="#FF1A1A1A"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <ImageButton
+                android:id="@+id/btnPinnedClose"
+                android:layout_width="36dip"
+                android:layout_height="fill_parent"
+                android:background="@drawable/header_btn"
+                android:contentDescription="@string/pinned_close"
+                android:src="@drawable/ic_close" />
+        </LinearLayout>
+
+        <!-- Серая линия, отделяющая плашку от списка (стиль линии шапки) -->
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dip"
+            android:background="#FFA8A8A8" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textInfo"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:padding="12dip"
+        android:text="@string/main_loading"
+        android:textSize="14sp" />
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1">
+
+        <ListView
+            android:id="@+id/listMessages"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:animationCache="false"
+            android:cacheColorHint="#FF0E1522"
+            android:divider="@null"
+            android:dividerHeight="0dip"
+            android:fadingEdge="none"
+            android:listSelector="@android:color/transparent"
+            android:scrollingCache="true" />
+
+        <!-- Плавающая кнопка: к последнему сообщению; видна, когда список прокручен вверх -->
+        <ImageButton
+            android:id="@+id/btnDown"
+            android:layout_width="44dip"
+            android:layout_height="44dip"
+            android:layout_gravity="bottom|right"
+            android:layout_marginBottom="12dip"
+            android:layout_marginRight="12dip"
+            android:background="@drawable/btn_down_bg"
+            android:contentDescription="@string/btn_scroll_down"
+            android:src="@drawable/ic_down"
+            android:visibility="gone" />
+    </FrameLayout>
+
+    <!-- Панель ответа: видна, пока выбрано сообщение, на которое отвечаем -->
+    <LinearLayout
+        android:id="@+id/replyBar"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#FF151D2E"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingBottom="4dip"
+        android:paddingLeft="8dip"
+        android:paddingTop="4dip"
+        android:visibility="gone">
+
+        <View
+            android:layout_width="3dip"
+            android:layout_height="fill_parent"
+            android:background="#FF4FC3F7" />
+
+        <TextView
+            android:id="@+id/replyText"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dip"
+            android:layout_marginRight="4dip"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:paddingLeft="8dip"
+            android:textColor="#FFDDE6F5"
+            android:textSize="13sp" />
+
+        <ImageButton
+            android:id="@+id/btnReplyCancel"
+            android:layout_width="40dip"
+            android:layout_height="40dip"
+            android:background="@null"
+            android:contentDescription="@string/reply_cancel"
+            android:padding="10dip"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_close" />
+    </LinearLayout>
+
+    <!-- Выбранные, но ещё не отправленные вложения; видна, только если они есть -->
+    <HorizontalScrollView
+        android:id="@+id/attachScroll"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#FF151D2E"
+        android:fadingEdge="none"
+        android:scrollbars="none"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:id="@+id/attachTray"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="3dip" />
+    </HorizontalScrollView>
+
+    <!-- Поле ввода; для каналов-трансляций скрывается -->
+    <org.mpgram.droid.InputBar
+        android:id="@+id/inputBar"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="bottom"
+        android:orientation="horizontal"
+        android:padding="4dip">
+
+        <!-- Кнопки 48x48 и поле ввода той же минимальной высоты 48 (отступы сверху и снизу заданы явно, чтобы фон поля не делал его выше кнопок) -->
+        <ImageButton
+            android:id="@+id/btnEmoji"
+            android:layout_width="48dip"
+            android:layout_height="48dip"
+            android:background="@drawable/btn_input_bg"
+            android:layout_marginRight="4dip"
+            android:contentDescription="@string/emoji_title"
+            android:padding="0dip"
+            android:scaleType="center"
+            android:src="@drawable/ic_emoji" />
+
+        <ImageButton
+            android:id="@+id/btnAttach"
+            android:layout_width="48dip"
+            android:layout_height="48dip"
+            android:background="@drawable/btn_input_bg"
+            android:layout_marginRight="4dip"
+            android:contentDescription="@string/attach_title"
+            android:padding="0dip"
+            android:scaleType="center"
+            android:src="@drawable/ic_attach" />
+
+        <EditText
+            android:id="@+id/editMessage"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="@string/hint_message"
+            android:inputType="textMultiLine|textCapSentences"
+            android:maxLength="4096"
+            android:maxLines="4"
+            android:paddingBottom="6dip"
+            android:paddingTop="6dip" />
+
+        <ImageButton
+            android:id="@+id/btnSend"
+            android:layout_width="48dip"
+            android:layout_height="48dip"
+            android:background="@drawable/btn_input_bg"
+            android:layout_marginLeft="4dip"
+            android:contentDescription="@string/btn_send"
+            android:padding="0dip"
+            android:scaleType="center"
+            android:src="@drawable/ic_send" />
+    </org.mpgram.droid.InputBar>
+
+    <include layout="@layout/emoji_panel" />
+</LinearLayout>

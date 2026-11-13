@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Строка меню прикрепления: иконка и название -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:minHeight="52dip"
+    android:orientation="horizontal"
+    android:padding="12dip">
+
+    <ImageView
+        android:id="@+id/attachIcon"
+        android:layout_width="28dip"
+        android:layout_height="28dip"
+        android:contentDescription="@null" />
+
+    <TextView
+        android:id="@+id/attachText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="14dip"
+        android:textColor="#FF000000"
+        android:textSize="18sp" />
+</LinearLayout>

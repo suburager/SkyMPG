@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/header" />
+
+    <!-- Вкладки папок; скрыты, если у аккаунта нет папок -->
+    <HorizontalScrollView
+        android:id="@+id/folderBar"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_window"
+        android:fadingEdge="none"
+        android:fillViewport="true"
+        android:scrollbars="none"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:id="@+id/folderRow"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" />
+    </HorizontalScrollView>
+
+    <TextView
+        android:id="@+id/textInfo"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:padding="12dip"
+        android:text="@string/main_loading"
+        android:textSize="14sp" />
+
+    <!-- Настройки для плавной прокрутки на слабых устройствах -->
+    <ListView
+        android:id="@+id/listChats"
+        android:layout_width="fill_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:animationCache="false"
+        android:cacheColorHint="#FF0E1522"
+        android:fadingEdge="none"
+        android:scrollingCache="true" />
+</LinearLayout>

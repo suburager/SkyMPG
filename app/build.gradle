@@ -1,0 +1,39 @@
+apply plugin: 'com.android.application'
+
+android {
+    namespace 'org.mpgram.droid'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.suburager.skympg"
+        minSdk 3
+        targetSdk 35
+        versionCode 1
+        versionName "1.0"
+    }
+
+    // Без лямбд и прочего Java 8-синтаксиса: на minSdk 3 десугаринг лучше не провоцировать
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+        }
+    }
+
+    lint {
+        abortOnError false
+        checkReleaseBuilds false
+    }
+}
+
+// gradle reinstall: собирает debug APK и ставит его поверх установленной версии (adb install -r),
+// данные приложения и вход в аккаунт сохраняются. Нужен adb в PATH.
+tasks.register('reinstall', Exec) {
+    dependsOn 'assembleDebug'
+    commandLine 'adb', 'install', '-r',
+            layout.buildDirectory.file('outputs/apk/debug/app-debug.apk').get().asFile.absolutePath
+}

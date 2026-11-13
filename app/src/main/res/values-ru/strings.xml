@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SkyMPG</string>
+
+    <string name="label_instance">Инстанс</string>
+    <string name="hint_instance">http://адрес/путь/</string>
+    <string name="label_instance_password">Пароль инстанса (если нужен)</string>
+    <string name="label_phone">Номер телефона</string>
+    <string name="hint_phone">+1234567890</string>
+    <string name="btn_login_phone">Войти по номеру</string>
+    <string name="btn_login_qr">Войти по QR-коду</string>
+
+    <string name="label_code">Введите код из Telegram</string>
+    <string name="label_password">Облачный пароль (двухфакторная защита)</string>
+    <string name="menu">Меню</string>
+    <string name="btn_ok">Продолжить</string>
+    <string name="btn_resend">Отправить код ещё раз</string>
+    <string name="btn_code_to_qr"><u>Не приходит код?</u></string>
+    <string name="btn_cancel">Отмена</string>
+    <string name="qr_hint">Откройте Telegram на современном устройстве: Настройки &gt; Устройства &gt; Подключить устройство, и отсканируйте этот код.</string>
+
+    <string name="warning_new_accounts">Не используйте аккаунты, созданные менее 6 месяцев назад!</string>
+
+    <string name="wait">Подождите…</string>
+    <string name="code_resent">Код отправлен повторно</string>
+    <string name="err_network">Ошибка сети</string>
+    <string name="err_unknown">Неизвестная ошибка</string>
+    <string name="err_no_instance">Укажите адрес инстанса</string>
+    <string name="err_no_phone">Укажите номер телефона</string>
+    <string name="err_bad_image">Не удалось декодировать изображение</string>
+    <string name="err_code_invalid">Неверный код. Код отправлен заново, введите новый.</string>
+    <string name="err_code_expired">Код устарел. Код отправлен заново, введите новый.</string>
+    <string name="err_auth_restart">Авторизация прервана, начните заново.</string>
+    <string name="err_phone_invalid">Неверный номер телефона.</string>
+    <string name="err_no_password">На аккаунте включён облачный пароль, но он не задан. Войти нельзя.</string>
+    <string name="err_need_signup">Этот номер не зарегистрирован в Telegram.</string>
+    <string name="err_server">Ошибка на стороне сервера</string>
+    <string name="err_unknown_res">Неожиданный ответ сервера</string>
+    <string name="err_ipw_required">Инстанс требует пароль.</string>
+    <string name="err_ipw_wrong">Неверный пароль инстанса.</string>
+    <string name="err_api_disabled">На этом инстансе API отключён.</string>
+    <string name="err_login_disabled">На этом инстансе вход через API отключён.</string>
+    <string name="err_version">Инстанс не поддерживает эту версию API.</string>
+
+    <string name="main_loading">Загрузка…</string>
+    <string name="btn_logout">Выйти</string>
+
+    <string name="label_language">Язык</string>
+    <string name="lang_auto">Авто (как в системе)</string>
+    <string name="settings">Настройки</string>
+
+    <string name="about">О приложении</string>
+    <string name="about_title">О приложении</string>
+    <string name="about_version">Версия %1$s</string>
+    <string name="about_description">SkyMPG — лёгкий клиент Telegram для старых устройств на Android (от Android 1.5). Вместо реализации протокола Telegram на самом устройстве он общается с сервером MPGram по простому HTTP и JSON API, поэтому остаётся маленьким и быстрым на старом железе.</string>
+    <string name="about_credits_title">Благодарности</string>
+    <string name="about_credits_mpgram">MPGram Web от shinovon: сервер и HTTP API, с которым работает это приложение.</string>
+    <string name="about_credits_madeline">MadelineProto от Daniil Gentili: библиотека MTProto для Telegram, на которой построены серверы MPGram.</string>
+    <string name="about_app_license">Сам SkyMPG распространяется как свободное программное обеспечение.</string>
+    <string name="about_made_by">Сделано suburager с ♥️ для ретро-устройств на Android</string>
+    <string name="about_license">Лицензия</string>
+    <string name="btn_close">Закрыть</string>
+    <string name="about_disclaimer">Это неофициальный клиент, не связанный с Telegram.</string>
+    <string name="welcome_tagline">Лёгкий клиент Telegram для старых устройств на Android</string>
+    <string name="btn_start">Начать</string>
+    <string name="instance_custom">Свой инстанс</string>
+    <string name="ping_offline">нет ответа</string>
+    <string name="ping_ms">мс</string>
+    <string name="ping_recheck"><u>Проверить снова</u></string>
+    <string name="login_title">Вход</string>
+    <string name="captcha_title">Капча</string>
+    <string name="hint_captcha">Введите текст с капчи...</string>
+
+    <string name="refresh">Обновить</string>
+    <string name="chats_empty">Нет чатов</string>
+    <string name="chat_deleted">Удалённый аккаунт</string>
+    <string name="preview_you">Вы:</string>
+    <string name="preview_photo">Фото</string>
+    <string name="preview_voice">Голосовое сообщение</string>
+    <string name="preview_audio">Аудио</string>
+    <string name="preview_file">Файл</string>
+    <string name="preview_link">Ссылка</string>
+    <string name="preview_location">Геопозиция</string>
+    <string name="preview_poll">Опрос</string>
+    <string name="preview_service">Служебное сообщение</string>
+    <string name="preview_media">Медиа</string>
+
+    <string name="chat_empty">Нет сообщений</string>
+    <string name="pinned_title">Закреплённое сообщение</string>
+    <string name="pinned_close">Скрыть</string>
+    <string name="date_today">Сегодня</string>
+    <string name="date_yesterday">Вчера</string>
+    <string name="fwd_from">Переслано от %1$s</string>
+    <string name="fwd_unknown">неизвестно</string>
+    <string name="svc_joined">%1$s присоединился</string>
+    <string name="svc_left">%1$s вышел</string>
+    <string name="svc_renamed">Чат переименован: %1$s</string>
+    <string name="svc_pinned">Сообщение закреплено</string>
+    <string name="unit_kb">КБ</string>
+    <string name="unit_mb">МБ</string>
+    <string name="err_load_older">Не удалось загрузить старые сообщения</string>
+    <string name="err_load_newer">Не удалось загрузить свежие сообщения</string>
+
+    <string name="hint_message">Сообщение</string>
+    <string name="btn_send">Отправить</string>
+    <string name="sending">отправка…</string>
+    <string name="err_send_failed">Сообщение не отправлено</string>
+
+    <string name="folder_all">Все</string>
+    <string name="folder_archive">Архив</string>
+    <string name="folder_n">Папка %1$s</string>
+
+    <string name="btn_download">Скачать</string>
+    <string name="dl_title">Скачать файл?</string>
+    <string name="dl_progress">Скачивание…</string>
+    <string name="dl_done">Сохранено: %1$s</string>
+    <string name="dl_failed">Не удалось скачать</string>
+    <string name="dl_no_storage">Нет доступной для записи памяти</string>
+    <string name="viewer_loading">Загрузка…</string>
+    <string name="viewer_error">Не удалось загрузить изображение</string>
+    <string name="btn_scroll_down">К последнему сообщению</string>
+
+    <string name="label_pin">ПИН-код</string>
+    <string name="pin_state_on">Включён: код спрашивается при входе в приложение</string>
+    <string name="pin_state_off">Отключён</string>
+    <string name="btn_pin_set">Установить ПИН-код</string>
+    <string name="btn_pin_disable">Отключить ПИН-код</string>
+    <string name="pin_title">ПИН-код</string>
+    <string name="pin_enter">Введите ПИН-код</string>
+    <string name="pin_new">Введите новый ПИН-код (4–8 цифр)</string>
+    <string name="pin_repeat">Повторите ПИН-код</string>
+    <string name="pin_confirm_off">Введите ПИН-код, чтобы отключить его</string>
+    <string name="pin_wrong">Неверный ПИН-код</string>
+    <string name="pin_mismatch">Коды не совпадают, попробуйте снова</string>
+    <string name="pin_short">ПИН-код: от 4 до 8 цифр</string>
+    <string name="pin_set_done">ПИН-код установлен</string>
+    <string name="pin_off_done">ПИН-код отключён</string>
+    <string name="pin_blocked">Слишком много попыток. Подождите %1$d с</string>
+
+    <string name="attach_title">Прикрепить</string>
+    <string name="attach_gallery">Галерея</string>
+    <string name="attach_files">Файлы</string>
+    <string name="attach_photos">Фото</string>
+    <string name="attach_videos">Видео</string>
+    <string name="attach_no_app">Нет приложения для выбора файла</string>
+    <string name="uploading">Отправка файла…</string>
+    <string name="files_title">Файлы</string>
+    <string name="files_empty">Папка пуста</string>
+    <string name="files_unreadable">Не удаётся открыть эту папку</string>
+
+    <string name="upload_progress">%1$d из %2$d: %3$s</string>
+    <string name="attach_limit">Не больше %1$d вложений</string>
+    <string name="attach_remove">Убрать</string>
+
+    <string name="unit_per_sec">/с</string>
+
+    <string name="link_open_title">Открыть ссылку?</string>
+    <string name="btn_open">Открыть</string>
+    <string name="link_blocked">Такие ссылки не открываются</string>
+    <string name="link_no_app">Нет приложения для открытия ссылки</string>
+
+    <string name="upload_done">Отправлено файлов: %1$d</string>
+    <string name="warn_title">Предупреждение</string>
+    <string name="warn_android5">Этот клиент предназначен для работы исключительно на Android 1.5–4.4.\n\nРазработчик не несёт никакой ответственности за баги, ошибки и вылеты при запуске на Android 5.0 и выше. Если вы продолжите, то делаете это на свой страх и риск.</string>
+    <string name="warn_continue">Понимаю, продолжить</string>
+    <string name="warn_exit">Выйти</string>
+
+    <string name="emoji_title">Эмодзи</string>
+    <string name="emoji_delete">Удалить</string>
+
+    <string name="btn_download_all">Скачать все</string>
+    <string name="dl_all_done">Сохранено файлов: %1$d (%2$s)</string>
+
+    <string name="chat_info">О чате</string>
+    <string name="members_one">участник</string>
+    <string name="members_few">участника</string>
+    <string name="members_many">участников</string>
+    <string name="subscribers_one">подписчик</string>
+    <string name="subscribers_few">подписчика</string>
+    <string name="subscribers_many">подписчиков</string>
+    <string name="label_username">Имя пользователя</string>
+    <string name="label_id">ID</string>
+    <string name="copied">Скопировано</string>
+
+    <string name="btn_write">Написать</string>
+    <string name="btn_background">В фон</string>
+    <string name="dl_notif_done">Скачано · нажмите, чтобы открыть</string>
+    <string name="typing_self">печатает…</string>
+    <string name="typing_other">%1$s печатает…</string>
+    <string name="voice_self">записывает голосовое…</string>
+    <string name="voice_other">%1$s записывает голосовое…</string>
+    <string name="file_self">отправляет файл…</string>
+    <string name="file_other">%1$s отправляет файл…</string>
+    <string name="msg_delete">Удалить</string>
+    <string name="msg_copy">Скопировать</string>
+    <string name="msg_pin">Закрепить</string>
+    <string name="msg_delete_confirm">Удалить это сообщение?</string>
+    <string name="msg_copied">Скопировано</string>
+    <string name="msg_nothing_to_copy">Нечего копировать</string>
+    <string name="msg_pinned_ok">Закреплено</string>
+    <string name="msg_reply">Ответить</string>
+    <string name="msg_edit">Изменить</string>
+    <string name="msg_actions">Действия...</string>
+    <string name="msg_editing">Редактирование</string>
+    <string name="err_edit_failed">Не удалось изменить сообщение</string>
+    <string name="reply_cancel">Отменить ответ</string>
+</resources>

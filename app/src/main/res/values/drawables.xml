@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Android 1.5 - 2.3: растровые 9-patch пузыри, на программной отрисовке они в разы дешевле градиентов -->
+    <drawable name="bubble_in">@drawable/bubble_in_9</drawable>
+    <drawable name="bubble_out">@drawable/bubble_out_9</drawable>
+    <!-- Фон окон: едва заметный синеватый оттенок под цвет шапки; сплошной цвет рисуется дешевле градиента -->
+    <drawable name="bg_window">#FF0E1522</drawable>
+</resources>

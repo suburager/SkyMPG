@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC" />
+
+    <application
+        android:allowBackup="false"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme">
+
+        <activity
+            android:name=".WelcomeActivity"
+            android:exported="true"
+            android:configChanges="orientation|keyboardHidden">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".LoginActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".MainActivity"
+            android:configChanges="orientation|keyboardHidden" />
+
+        <activity
+            android:name=".TopicsActivity"
+            android:configChanges="orientation|keyboardHidden" />
+
+        <activity
+            android:name=".ChatActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".SettingsActivity"
+            android:configChanges="orientation|keyboardHidden" />
+
+        <service
+            android:name=".UploadService"
+            android:foregroundServiceType="dataSync" />
+        <service
+            android:name=".DownloadService"
+            android:foregroundServiceType="dataSync" />
+
+        <activity
+            android:name=".ViewerActivity"
+            android:configChanges="orientation|keyboardHidden" />
+
+        <activity
+            android:name=".FilePickerActivity"
+            android:configChanges="orientation|keyboardHidden" />
+
+        <activity
+            android:name=".ChatInfoActivity"
+            android:configChanges="orientation|keyboardHidden" />
+
+        <activity
+            android:name=".PinActivity"
+            android:configChanges="orientation|keyboardHidden" />
+
+        <activity
+            android:name=".AboutActivity"
+            android:configChanges="orientation|keyboardHidden" />
+
+        <activity
+            android:name=".LicenseActivity"
+            android:configChanges="orientation|keyboardHidden" />
+    </application>
+</manifest>
