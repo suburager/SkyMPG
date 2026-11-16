@@ -1,0 +1,406 @@
+import java.io.ByteArrayOutputStream
+import java.io.File
+import java.io.FileInputStream
+import java.io.FileOutputStream
+import java.io.IOException
+import java.io.InputStream
+import java.nio.ByteBuffer
+import java.nio.ByteOrder
+import java.nio.charset.Charset
+import java.util.ArrayList
+import java.util.Enumeration
+import java.util.zip.CRC32
+import java.util.zip.ZipEntry
+import java.util.zip.ZipFile
+import java.util.zip.ZipOutputStream
+
+apply plugin: 'com.android.application'
+
+android {
+    namespace 'org.mpgram.droid'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.suburager.skympg"
+        minSdk 3
+        targetSdk 35
+        versionCode 2
+        versionName "1.1"
+    }
+
+    // Без лямбд и прочего Java 8-синтаксиса: на minSdk 3 десугаринг лучше не провоцировать
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+        }
+    }
+
+    lint {
+        abortOnError false
+        checkReleaseBuilds false
+    }
+}
+
+// gradle reinstall: собирает debug APK и ставит его поверх установленной версии (adb install -r),
+// данные приложения и вход в аккаунт сохраняются. Нужен adb в PATH.
+tasks.register('reinstall', Exec) {
+    dependsOn 'assembleDebug'
+    commandLine 'adb', 'install', '-r',
+            layout.buildDirectory.file('outputs/apk/debug/app-debug.apk').get().asFile.absolutePath
+}
+
+// aapt2 пишет таблицу ресурсов и XML экранов в UTF-8, а Android 2.2 и старше читает только UTF-16:
+// без этого вместо названия приложения иероглифы, нет иконки, а при запуске вылет.
+// После processResources переводим пулы строк в UTF-16 (класс Utf16Resources внизу этого файла).
+afterEvaluate {
+    // processXResources собирает ресурсы, а в release потом ещё optimizeReleaseResources (aapt2 optimize):
+    // он заново пишет resources.arsc в UTF-8, поэтому переводим результат и после него
+    tasks.matching { it.name ==~ /(process|optimize|shrink|convertShrunkResourcesToBinary)\w*Res(ources)?/ }.configureEach { t ->
+        t.doLast {
+            t.outputs.files.asFileTree.matching { include '**/*.ap_' }.files.each { f ->
+                int n = Utf16Resources.convertApk(f)
+                println "SkyMPG: ресурсы переведены в UTF-16 (" + n + " файлов) в " + f.name
+            }
+        }
+    }
+}
+
+// ---------------------------------------------------------------------------------------------
+// Перевод пулов строк ресурсов из UTF-8 в UTF-16 (см. хук afterEvaluate выше).
+// aapt2 пишет resources.arsc и XML в UTF-8, а Android 2.2 и старше читает только UTF-16.
+// ---------------------------------------------------------------------------------------------
+class Utf16Resources {
+
+    private static final int RES_STRING_POOL = 0x0001;
+    private static final int RES_TABLE = 0x0002;
+    private static final int RES_XML = 0x0003;
+    private static final int RES_TABLE_PACKAGE = 0x0200;
+    private static final int UTF8_FLAG = 0x100;
+    private static final int SORTED_FLAG = 0x1;
+    private static final Charset UTF8 = Charset.forName("UTF-8");
+    private static final Charset UTF16 = Charset.forName("UTF-16LE");
+
+    /** Обрабатывает .ap_ (zip с ресурсами) на месте. Возвращает число переписанных файлов. */
+    public static int convertApk(File ap) throws IOException {
+        File tmp = new File(ap.getPath() + ".utf16tmp");
+        int changed = 0;
+        ZipFile zf = new ZipFile(ap);
+        ZipOutputStream out = null;
+        try {
+            out = new ZipOutputStream(new FileOutputStream(tmp));
+            Enumeration<? extends ZipEntry> en = zf.entries();
+            while (en.hasMoreElements()) {
+                ZipEntry e = en.nextElement();
+                byte[] data = readAll(zf.getInputStream(e));
+                byte[] conv = null;
+                if (!e.isDirectory()) {
+                    String n = e.getName();
+                    if (n.equals("resources.arsc")) {
+                        conv = convertTable(data);
+                    } else if (n.endsWith(".xml")) {
+                        conv = convertXml(data);
+                    }
+                }
+                if (conv != null) {
+                    data = conv;
+                    changed++;
+                }
+                ZipEntry ne = new ZipEntry(e.getName());
+                if (e.getTime() != -1) {
+                    ne.setTime(e.getTime());
+                }
+                if (e.getMethod() == ZipEntry.STORED) {
+                    CRC32 crc = new CRC32();
+                    crc.update(data, 0, data.length);
+                    ne.setMethod(ZipEntry.STORED);
+                    ne.setSize(data.length);
+                    ne.setCompressedSize(data.length);
+                    ne.setCrc(crc.getValue());
+                } else {
+                    ne.setMethod(ZipEntry.DEFLATED);
+                }
+                out.putNextEntry(ne);
+                out.write(data);
+                out.closeEntry();
+            }
+        } finally {
+            zf.close();
+            if (out != null) {
+                out.close();
+            }
+        }
+        if (changed == 0) {
+            tmp.delete();
+            return 0;
+        }
+        if (!ap.delete() || !tmp.renameTo(ap)) {
+            throw new IOException("Не удалось заменить " + ap);
+        }
+        return changed;
+    }
+
+    /** null, если файл не бинарная таблица ресурсов или в ней уже UTF-16. */
+    public static byte[] convertTable(byte[] src) throws IOException {
+        ByteBuffer b = le(src);
+        if (src.length < 12 || u16(b, 0) != RES_TABLE) {
+            return null;
+        }
+        int hdr = u16(b, 2);
+        int size = (int) u32(b, 4);
+        ByteArrayOutputStream body = new ByteArrayOutputStream();
+        boolean changed = false;
+        int off = hdr;
+        while (off + 8 <= size && off + 8 <= src.length) {
+            int type = u16(b, off);
+            int csz = (int) u32(b, off + 4);
+            if (csz < 8) {
+                throw new IOException("Повреждён resources.arsc");
+            }
+            if (type == RES_STRING_POOL) {
+                byte[] p = convertPool(src, off, csz);
+                if (p != null) {
+                    body.write(p);
+                    changed = true;
+                } else {
+                    body.write(src, off, csz);
+                }
+            } else if (type == RES_TABLE_PACKAGE) {
+                byte[] p = convertPackage(src, off, csz);
+                if (p != null) {
+                    body.write(p);
+                    changed = true;
+                } else {
+                    body.write(src, off, csz);
+                }
+            } else {
+                body.write(src, off, csz);
+            }
+            off += csz;
+        }
+        if (!changed) {
+            return null;
+        }
+        byte[] rest = body.toByteArray();
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        out.write(src, 0, hdr);
+        out.write(rest);
+        byte[] res = out.toByteArray();
+        putInt(res, 4, res.length);
+        return res;
+    }
+
+    private static byte[] convertPackage(byte[] src, int start, int csz) throws IOException {
+        ByteBuffer b = le(src);
+        int hdr = u16(b, start + 2);
+        int typeStrings = (int) u32(b, start + 8 + 4 + 256);
+        int keyStrings = (int) u32(b, start + 8 + 4 + 256 + 8);
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        out.write(src, start, hdr);
+        int newType = typeStrings;
+        int newKey = keyStrings;
+        boolean changed = false;
+        int off = hdr;
+        while (off + 8 <= csz) {
+            int type = u16(b, start + off);
+            int sz = (int) u32(b, start + off + 4);
+            if (sz < 8) {
+                throw new IOException("Повреждён пакет в resources.arsc");
+            }
+            if (off == typeStrings) {
+                newType = out.size();
+            }
+            if (off == keyStrings) {
+                newKey = out.size();
+            }
+            byte[] p = null;
+            if (type == RES_STRING_POOL && (off == typeStrings || off == keyStrings)) {
+                p = convertPool(src, start + off, sz);
+            }
+            if (p != null) {
+                out.write(p);
+                changed = true;
+            } else {
+                out.write(src, start + off, sz);
+            }
+            off += sz;
+        }
+        if (!changed) {
+            return null;
+        }
+        byte[] res = out.toByteArray();
+        putInt(res, 4, res.length);
+        putInt(res, 8 + 4 + 256, newType);
+        putInt(res, 8 + 4 + 256 + 8, newKey);
+        return res;
+    }
+
+    /** null, если это не бинарный XML или пул уже в UTF-16. */
+    public static byte[] convertXml(byte[] src) throws IOException {
+        ByteBuffer b = le(src);
+        if (src.length < 16 || u16(b, 0) != RES_XML) {
+            return null;
+        }
+        int hdr = u16(b, 2);
+        if (hdr + 8 > src.length || u16(b, hdr) != RES_STRING_POOL) {
+            return null;
+        }
+        int psz = (int) u32(b, hdr + 4);
+        byte[] pool = convertPool(src, hdr, psz);
+        if (pool == null) {
+            return null;
+        }
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        out.write(src, 0, hdr);
+        out.write(pool);
+        out.write(src, hdr + psz, src.length - hdr - psz);
+        byte[] res = out.toByteArray();
+        putInt(res, 4, res.length);
+        return res;
+    }
+
+    /** Пул строк в UTF-16. null, если пул уже в UTF-16. */
+    private static byte[] convertPool(byte[] src, int start, int csz) throws IOException {
+        ByteBuffer b = le(src);
+        int hdr = u16(b, start + 2);
+        int count = (int) u32(b, start + 8);
+        int styleCount = (int) u32(b, start + 12);
+        int flags = (int) u32(b, start + 16);
+        int stringsStart = (int) u32(b, start + 20);
+        int stylesStart = (int) u32(b, start + 24);
+        if ((flags & UTF8_FLAG) == 0) {
+            return null;
+        }
+        int offsetsAt = start + hdr;
+        ArrayList<byte[]> strings = new ArrayList<byte[]>(count);
+        boolean surrogates = false;
+        for (int i = 0; i < count; i++) {
+            int so = (int) u32(b, offsetsAt + i * 4);
+            int p = start + stringsStart + so;
+            // длина в символах UTF-16 (1 или 2 байта), затем длина в байтах UTF-8 (1 или 2 байта)
+            int[] r = readLen8(src, p);
+            p = r[1];
+            int[] r2 = readLen8(src, p);
+            int byteLen = r2[0];
+            p = r2[1];
+            String s = new String(src, p, byteLen, UTF8);
+            for (int k = 0; k < s.length(); k++) {
+                if (Character.isSurrogate(s.charAt(k))) {
+                    surrogates = true;
+                    break;
+                }
+            }
+            strings.add(encode16(s));
+        }
+        // Новые смещения строк
+        int[] newOffsets = new int[count];
+        int pos = 0;
+        for (int i = 0; i < count; i++) {
+            newOffsets[i] = pos;
+            pos += strings.get(i).length;
+        }
+        int pad = (4 - (pos % 4)) % 4;
+        int stringsBytes = pos + pad;
+
+        int newStringsStart = hdr + (count + styleCount) * 4;
+        byte[] styles = new byte[0];
+        if (styleCount > 0 && stylesStart != 0) {
+            styles = new byte[csz - stylesStart];
+            System.arraycopy(src, start + stylesStart, styles, 0, styles.length);
+        }
+        int newStylesStart = styleCount > 0 ? newStringsStart + stringsBytes : 0;
+        int total = newStringsStart + stringsBytes + styles.length;
+
+        ByteBuffer o = ByteBuffer.allocate(total).order(ByteOrder.LITTLE_ENDIAN);
+        o.put(src, start, hdr); // заголовок пула как был
+        o.putInt(4, total);
+        int newFlags = flags & ~UTF8_FLAG;
+        if (surrogates) {
+            newFlags &= ~SORTED_FLAG; // порядок UTF-16 отличается от порядка кодовых точек
+        }
+        o.putInt(16, newFlags);
+        o.putInt(20, newStringsStart);
+        o.putInt(24, newStylesStart);
+        o.position(hdr);
+        for (int i = 0; i < count; i++) {
+            o.putInt(newOffsets[i]);
+        }
+        for (int i = 0; i < styleCount; i++) {
+            o.putInt((int) u32(b, offsetsAt + (count + i) * 4)); // смещения стилей относительно stylesStart
+        }
+        o.position(newStringsStart);
+        for (int i = 0; i < count; i++) {
+            o.put(strings.get(i));
+        }
+        o.position(newStringsStart + stringsBytes);
+        o.put(styles);
+        return o.array();
+    }
+
+    private static int[] readLen8(byte[] a, int p) {
+        int v = a[p] & 0xFF;
+        if ((v & 0x80) != 0) {
+            v = ((v & 0x7F) << 8) | (a[p + 1] & 0xFF);
+            return [v, p + 2] as int[];
+        }
+        return [v, p + 1] as int[];
+    }
+
+    /** Строка UTF-16: длина в символах (1 или 2 слова), символы, нулевой терминатор. */
+    private static byte[] encode16(String s) {
+        byte[] chars = s.getBytes(UTF16);
+        int n = s.length();
+        int head = n > 0x7FFF ? 4 : 2;
+        byte[] r = new byte[head + chars.length + 2];
+        if (n > 0x7FFF) {
+            int hi = 0x8000 | (n >> 16);
+            int lo = n & 0xFFFF;
+            r[0] = (byte) hi;
+            r[1] = (byte) (hi >> 8);
+            r[2] = (byte) lo;
+            r[3] = (byte) (lo >> 8);
+        } else {
+            r[0] = (byte) n;
+            r[1] = (byte) (n >> 8);
+        }
+        System.arraycopy(chars, 0, r, head, chars.length);
+        return r;
+    }
+
+    private static ByteBuffer le(byte[] a) {
+        return ByteBuffer.wrap(a).order(ByteOrder.LITTLE_ENDIAN);
+    }
+
+    private static int u16(ByteBuffer b, int p) {
+        return b.getShort(p) & 0xFFFF;
+    }
+
+    private static long u32(ByteBuffer b, int p) {
+        return b.getInt(p) & 0xFFFFFFFFL;
+    }
+
+    private static void putInt(byte[] a, int p, int v) {
+        a[p] = (byte) v;
+        a[p + 1] = (byte) (v >> 8);
+        a[p + 2] = (byte) (v >> 16);
+        a[p + 3] = (byte) (v >> 24);
+    }
+
+    private static byte[] readAll(InputStream in) throws IOException {
+        try {
+            ByteArrayOutputStream out = new ByteArrayOutputStream();
+            byte[] buf = new byte[16384];
+            int n;
+            while ((n = in.read(buf)) != -1) {
+                out.write(buf, 0, n);
+            }
+            return out.toByteArray();
+        } finally {
+            in.close();
+        }
+    }
+}

@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/header" />
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1">
+
+        <org.mpgram.droid.MaxWidthLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="12dip">
+
+            <TextView
+                android:id="@+id/textTitle"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:paddingBottom="12dip"
+                android:text="@string/login_title"
+                android:textColor="#FFFFFFFF"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textStatus"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:paddingBottom="8dip"
+                android:textSize="14sp"
+                android:visibility="gone" />
+
+            <!-- Главная панель: способы входа, ниже выбор инстанса -->
+            <LinearLayout
+                android:id="@+id/panelMain"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/btnPhone"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/btn_login_phone" />
+
+                <Button
+                    android:id="@+id/btnQr"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/btn_login_qr" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="16dip"
+                    android:text="@string/label_instance" />
+
+                <Spinner
+                    android:id="@+id/spinInstances"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" />
+
+                <EditText
+                    android:id="@+id/editInstance"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_instance"
+                    android:inputType="textUri"
+                    android:singleLine="true"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/textRecheck"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:gravity="center_horizontal"
+                    android:padding="8dip"
+                    android:text="@string/ping_recheck"
+                    android:textColor="#FF5C9CFF"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_instance_password" />
+
+                <EditText
+                    android:id="@+id/editInstancePassword"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:singleLine="true" />
+            </LinearLayout>
+
+            <!-- Ввод номера телефона -->
+            <LinearLayout
+                android:id="@+id/panelPhone"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_phone" />
+
+                <EditText
+                    android:id="@+id/editPhone"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_phone"
+                    android:inputType="phone"
+                    android:singleLine="true" />
+            </LinearLayout>
+
+            <!-- Капча -->
+            <LinearLayout
+                android:id="@+id/panelCaptcha"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <ImageView
+                    android:id="@+id/imgCaptcha"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:scaleType="fitXY"
+                    android:paddingTop="8dip"
+                    android:paddingBottom="8dip" />
+
+                <EditText
+                    android:id="@+id/editCaptcha"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_captcha"
+                    android:inputType="text"
+                    android:singleLine="true" />
+            </LinearLayout>
+
+            <!-- Код из Telegram -->
+            <LinearLayout
+                android:id="@+id/panelCode"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_code" />
+
+                <EditText
+                    android:id="@+id/editCode"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:singleLine="true" />
+
+                <Button
+                    android:id="@+id/btnResend"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/btn_resend" />
+                <TextView
+                    android:id="@+id/textCodeToQr"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:gravity="center_horizontal"
+                    android:padding="12dip"
+                    android:text="@string/btn_code_to_qr"
+                    android:textColor="#FF5C9CFF"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <!-- Облачный пароль -->
+            <LinearLayout
+                android:id="@+id/panelPassword"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_password" />
+
+                <EditText
+                    android:id="@+id/editPassword"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:singleLine="true" />
+            </LinearLayout>
+
+            <!-- QR -->
+            <LinearLayout
+                android:id="@+id/panelQr"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/qr_hint" />
+
+                <ImageView
+                    android:id="@+id/imgQr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:scaleType="fitXY"
+                    android:paddingTop="8dip"
+                    android:paddingBottom="8dip" />
+
+                <Button
+                    android:id="@+id/btnQrCancel"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/btn_cancel" />
+            </LinearLayout>
+        </org.mpgram.droid.MaxWidthLayout>
+    </ScrollView>
+    <!-- Кнопки "Продолжить" всех шагов входа: внизу экрана, над предупреждением -->
+    <org.mpgram.droid.MaxWidthLayout
+        android:id="@+id/barGo"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingLeft="12dip"
+        android:paddingRight="12dip">
+
+        <Button
+            android:id="@+id/btnPhoneGo"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_ok"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/btnCaptcha"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_ok"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/btnCode"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_ok"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/btnPassword"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_ok"
+            android:visibility="gone" />
+    </org.mpgram.droid.MaxWidthLayout>
+
+    <!-- Предупреждение: всегда видно внизу экрана -->
+    <TextView
+        android:id="@+id/textWarning"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:padding="8dip"
+        android:text="@string/warning_new_accounts"
+        android:textColor="#FFAAAAAA"
+        android:textSize="12sp"
+        android:textStyle="italic" />
+</LinearLayout>

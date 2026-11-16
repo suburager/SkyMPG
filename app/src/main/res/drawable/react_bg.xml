@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Реакция под сообщением: капсула (скругление больше половины высоты даёт полукруглые края) -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+    <solid android:color="#1F000000" />
+    <stroke android:width="1dip" android:color="#26000000" />
+    <corners android:radius="20dip" />
+</shape>
