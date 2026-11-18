@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Круглая плавающая кнопка "к последнему сообщению" -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true">
+        <shape android:shape="oval">
+            <solid android:color="#FF33B5E5" />
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="oval">
+            <solid android:color="#E62A3752" />
+            <stroke android:width="2dip" android:color="#FF33B5E5" />
+        </shape>
+    </item>
+</selector>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Плашка вложения над полем ввода: строгий прямоугольник с небольшим скруглением -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+    <solid android:color="#FF2A3752" />
+    <stroke android:width="1dip" android:color="#FF4A5B7C" />
+    <corners android:radius="3dip" />
+</shape>

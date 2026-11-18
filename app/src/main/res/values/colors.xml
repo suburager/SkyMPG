@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Тема по умолчанию: светлый список инстансов, поэтому тёмные цвета -->
+    <color name="instance_text">#FF000000</color>
+    <color name="ping_pending">#FF808080</color>
+    <color name="ping_good">#FF2E9E2E</color>
+    <color name="ping_mid">#FFC08A00</color>
+    <color name="ping_slow">#FFE06000</color>
+    <color name="ping_bad">#FFD02020</color>
+</resources>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Строка проводника: иконка, имя, справа размер -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:minHeight="48dip"
+    android:orientation="horizontal"
+    android:padding="8dip">
+
+    <ImageView
+        android:id="@+id/fileIcon"
+        android:layout_width="28dip"
+        android:layout_height="28dip"
+        android:contentDescription="@null" />
+
+    <TextView
+        android:id="@+id/fileName"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:ellipsize="middle"
+        android:paddingLeft="12dip"
+        android:singleLine="true"
+        android:textColor="#FFFFFFFF"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/fileInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="8dip"
+        android:singleLine="true"
+        android:textColor="#FF999999"
+        android:textSize="12sp" />
+</LinearLayout>

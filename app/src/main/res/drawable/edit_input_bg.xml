@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Фон поля ввода: тот же прямоугольник со скруглением 4dip, что у кнопок строки ввода (btn_input_bg),
+     поэтому поле и кнопки совпадают по размеру на любой версии Android (системный фон EditText
+     рисуется с разными прозрачными полями и делал поле визуально ниже кнопок) -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_focused="true">
+        <shape android:shape="rectangle">
+            <solid android:color="#FFF7F7F7" />
+            <stroke android:width="2dip" android:color="#FFEF7100" />
+            <corners android:radius="4dip" />
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#FFF7F7F7" />
+            <stroke android:width="1dip" android:color="#FF9E9E9E" />
+            <corners android:radius="4dip" />
+        </shape>
+    </item>
+</selector>

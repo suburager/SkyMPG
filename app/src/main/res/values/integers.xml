@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Правило склонения числительных: 0 английское (1 / остальные), 1 русское (1 / 2-4 / остальные) -->
+    <integer name="plural_rule">0</integer>
+</resources>
